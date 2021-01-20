@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="../common/webgl-utils.js">
+  </script>
+
+  <!--borrowed from assignment 3 in modules-->
+  <script src="../common/initShaders.js"></script>
+  <script src="../common/Cone.js"> </script>
+ 
+  
+  <script src = "cone.js"></script>
+
+  <!--vertex shader with attribute these are flag types-->
+  <script id = "Cone-vertex-shader" type="x-shader/x-vertex">
+
+    attribute vec4 vPosition;
+
+    void main()
+    {
+      gl_PointSize = 6.0;
+      gl_Position = vPosition;
+    }
+    
+  </script>
+
+  <!--fragment shader with attribute(s)-->
+  <script id = "Cone-fragment-shader" type = "x-shader/x-fragment">
+  
+    void main()
+    {
+      gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+    }
+  </script>
+
+</head>
+<body>
+  <canvas id="webgl-canvas" width="512" height="512" style="background-color: #ffffff"></canvas>
+</body>
+</html>
