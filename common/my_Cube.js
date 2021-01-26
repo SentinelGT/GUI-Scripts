@@ -20,23 +20,41 @@ function my_Cube( vertexShaderId, fragmentShaderId)
     this.positions = {
         values : new Float32Array([
             //add MY own list of vertex positions
-            0.0, 0.0, 0.0,
-            0.0, 1.0, 0.0,
-            0.0, 0.0, 1.0,
-            0.0, 1.0, 1.0,
-            1.0, 0.0, 1.0,
-            1.0, 0.0, 0.0,
-            1.0, 1.0, 1.0,
-            1.0, 1.0, 0.0
+            -0.5, -0.5, -0.5, //0, A
 
+            -0.5, .5, -0.5, //1, B
+
+            -0.5, .5, .5, //2, C
+
+            -0.5, -0.5, .5, //3, D
+
+            .5, -0.5, -0.5, //4, E
+
+            .5, .5, -0.5, //5, F
+
+            .5, .5, .5, //6, G
+            
+            .5, -0.5, .5 //7, H
 
         ]),
         numComponents : 3
     };
 
     this.indicies = {
-        values : new Uinit16Array([
+        values : new Uint16Array([
             //add my own set of triangle indicies to be created for each face of the cube
+            0, 7, 3, 0, 4, 7, //side AEHD
+
+            4, 6, 7, 4, 5, 6, //side EFGH
+
+            5, 2, 6, 5, 1, 2, //side FBCG
+
+            1, 3, 2, 1, 0, 3, //side BADC
+
+            3, 7, 6, 2, 3, 6, //side CDHG
+
+            4, 1, 5, 4, 0, 1 //side EABF
+
         ])
     };
     this.indicies.count = this.indicies.values.length;

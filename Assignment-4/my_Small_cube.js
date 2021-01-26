@@ -34,9 +34,9 @@ function render()
 {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    andle += 2.0; //degrees? is that enough for a cube?
+    angle += 2.0; //degrees? is that enough for a cube?
 
-    cube.MV = rotate  (angle, [1, 1, 0]);
+    cube.MV = rotate  (angle, [-1.5, 1.5, -0.5]);
 
     cube.render();
 
