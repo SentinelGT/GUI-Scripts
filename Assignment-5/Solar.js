@@ -127,7 +127,7 @@ function render() {
   gl.uniform4fv(sun.uniforms.color, flatten(data.color));
   sun.render();
   
-  // NOW THE ACTUAL PLANETS
+  // Now let's create some planets
   RenderPlanet(ms, "Earth", ["Moon"]);
   RenderPlanet(ms, "Mercury");
   RenderPlanet(ms,"Venus");
@@ -152,12 +152,12 @@ function RenderPlanet(ms, name, moons)
   // Up the scope.
   ms.push();
   
-  // Actual matrix stuff
+  // The actual movement, scaling, and translation of the matrix
   ms.rotate((1.0 / data.year) * time, [0.0, 1.0, 1.0]);
   ms.translate(data.distance, 0, 0);
   ms.scale(data.radius);
   
-  // Rendering stuff
+  // Redering the matrix
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
   gl.uniformMatrix4fv(planet.uniforms.P, false, flatten(P));
