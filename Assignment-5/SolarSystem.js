@@ -1,4 +1,5 @@
 var SolarSystem = {
+  // keeping all the axes fixed for the sake of simplicity
   Sun : {
     radius : 3,  
     distance : 0,

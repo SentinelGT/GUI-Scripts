@@ -1,6 +1,6 @@
-//
+// Blaine B.
 //  Sphere.js
-//
+// Came from a predefined file for the class offered modifications
 
 "use strict";
 

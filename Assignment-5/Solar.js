@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
-//
-//  Solar.js
+//  Blaine B.
+//  Modified version of Solar.js
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -88,12 +88,6 @@ function init() {
   window.requestAnimationFrame(render);  
 }
 
-//---------------------------------------------------------------------------
-//
-//  render() - render the scene
-//
-
-
 
 // Create a few temporary variables to make it simpler to work with
 // the various properties we'll use to render the planets.  The Planets
@@ -127,24 +121,25 @@ function render() {
   gl.uniform4fv(sun.uniforms.color, flatten(data.color));
   sun.render();
   
-  // Now let's create some planets
-  RenderPlanet(ms, "Earth", ["Moon"]);
-  RenderPlanet(ms, "Mercury");
-  RenderPlanet(ms,"Venus");
-  RenderPlanet(ms, "Mars");
-  RenderPlanet(ms, "Jupiter");
-  RenderPlanet(ms, "Saturn");
-  RenderPlanet(ms, "Uranus");
-  RenderPlanet(ms, "Neptune");
-  RenderPlanet(ms, "Pluto");
+  // Now let's create some planets!
+  DrawMyPlanet(ms, "Earth", ["Moon"]);
+  DrawMyPlanet(ms, "Mercury");
+  DrawMyPlanet(ms,"Venus");
+  DrawMyPlanet(ms, "Mars");
+  DrawMyPlanet(ms, "Jupiter");
+  DrawMyPlanet(ms, "Saturn");
+  DrawMyPlanet(ms, "Uranus");
+  DrawMyPlanet(ms, "Neptune");
+  DrawMyPlanet(ms, "Pluto");
   
   ms.pop();
   
   window.requestAnimationFrame(render);
 }
 
-function RenderPlanet(ms, name, moons)
+function DrawMyPlanet(ms, name, moons)
 {
+  //still keeping the same layout as before
   var planet = Planets[name];
   var data = SolarSystem[name];
   planet.PointMode = false;
@@ -157,13 +152,15 @@ function RenderPlanet(ms, name, moons)
   ms.translate(data.distance, 0, 0);
   ms.scale(data.radius);
   
-  // Redering the matrix
+  // Rendering the matrix
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
   gl.uniformMatrix4fv(planet.uniforms.P, false, flatten(P));
   gl.uniform4fv(planet.uniforms.color, flatten(data.color));
   planet.render();
   
+
+  // checks for any moons tha might be in place, could be applied to ther planets
   if(moons) {
     for(var i = 0; i < moons.length; i++)
       {
@@ -176,8 +173,9 @@ function RenderPlanet(ms, name, moons)
 
 function RenderMoon(ms, name)
 {
-  //debug line
-  //console.log(name);
+  // debug line
+  // to view the points
+  // console.log(name);
 
   var moon = Planets[name];
   var data = SolarSystem[name];
@@ -186,7 +184,8 @@ function RenderMoon(ms, name)
   // Up the scope.
   ms.push();
   
-  // Actual matrix stuff
+  // //rotate --> translate --> scale 
+  // //order of matrix math
   ms.rotate((1.0 / data.year) * time, [0.0, 1.0, 1.0]);
   ms.translate(data.distance, 0, 0);
   ms.scale(data.radius);
@@ -202,42 +201,7 @@ function RenderMoon(ms, name)
   ms.pop();
 }
 
-  // var name, planet, data, scope;
 
-  // name = "Sun";
-  // planet = Planets[name];
-  // data = SolarSystem[name];
-
-
-  
-  // // Set PointMode to true to render all the vertices as points, as
-  // // compared to filled triangles.  This can be useful if you think
-  // // your planet might be inside another planet or the Sun.  Since the
-  // // "planet" variable is set for each object, you will need to set this
-  // // for each planet separately.
-
-  // planet.PointMode = false;
-
-  // // Use the matrix stack to configure and render a planet.  How you rener
-  // // each planet will be similar, but not exactly the same.  In particular,
-  // // here, we're only rendering the Sun, which is the center of the Solar
-  // // system (and hence, has no translation to its location).
-
-  // ms.push();
-  // ms.scale(data.radius);
-  // gl.useProgram(planet.program);
-  // gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
-  // gl.uniformMatrix4fv(planet.uniforms.P, false, flatten(P));
-  // gl.uniform4fv(planet.uniforms.color, flatten(data.color));
-  // planet.render();
-  // ms.pop();
-
-
-  // //
-  // //  Add your code for more planets here!
-
-  // //rotate --> translate --> scale 
-  // //order of matrix math
 
 
 //---------------------------------------------------------------------------
