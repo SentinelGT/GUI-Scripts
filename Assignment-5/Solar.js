@@ -164,14 +164,14 @@ function DrawMyPlanet(ms, name, moons)
   if(moons) {
     for(var i = 0; i < moons.length; i++)
       {
-        RenderMoon(ms, moons[i]);
+        DrawManyMoons(ms, moons[i]);
       }
   }
   // Drop the scope.
   ms.pop();
 }
 
-function RenderMoon(ms, name)
+function DrawManyMoons(ms, name)
 {
   // debug line
   // to view the points
