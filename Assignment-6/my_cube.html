@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+    <head>
+        <meta charset = "utf-8"/>
+
+        <script src="../common/webgl-utils.js"></script>
+        <script src="../common/initShaders.js"></script>
+        <script src="../common/MV.js"></script>
+        <script src="../common/my_Big_Cube.js"></script>
+        <script src="my_Small_cube.js"></script>
+
+        <!--made my own custom shader id tags-->
+        <script id = "myCube-vertex-shader" type = "x-shader/x-vertex">
+        attribute vec4 vPosition;
+
+        attribute vec2 aTexcoord;
+
+        uniform mat4 MV;
+
+        varying vec2 vTexcoord;
+
+        void main()
+        {
+
+            gl_PointSize = 6.5;
+            gl_Position = MV * vPosition;
+
+            vTexcoord = aTexcoord;
+        }
+        </script>
+
+        <script id="myCube-fragment-shader" type="x-shader/x-fragment">
+
+        precision mediump float;
+
+        varying vec2 vTexcoord;
+
+        uniform sampler2D uTexture;
+        void main()
+        {
+            gl_FragColor = texture2D(uTexture, vTexcoord)
+        }
+        </script>
+    </head>
+
+    <!--not sure why we need a body? I guess for a canvas to draw on?-->
+    <body>
+        <canvas id="webgl-canvas" width="1024" height="1024" style="background-color: darkgrey"></canvas>
+    </body>
+</html>
